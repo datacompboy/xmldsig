@@ -19,6 +19,11 @@ module Xmldsig
             "http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
             "http://www.w3.org/2006/12/xml-c14n11"
           Transforms::Canonicalize.new(node, transform_node)
+        when "http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"
+          # TODO: Really left comments there
+          Transforms::Canonicalize.new(node, transform_node)
+        else
+          raise "Unknown transform" + transform_node.get_attribute("Algorithm")
       end
     end
 
